@@ -85,17 +85,16 @@ function selectText() {
 
 function showNumbers(action) {
     switch (action) {
-        case "+": case "-": case "-": case "/":
-            numbers.innerHTML="<label for=\"first\">Enter the first number: </label>\n" +
-                "        <input type=\"number\" id=\"first\">\n" +
-                "        <label for=\"second\">Enter the second number: </label>\n" +
-                "        <input type=\"number\" id=\"second\">"
+        case "+": case "-": case "-": case "/": case"*":
             decision = action
+            numbers.innerHTML="<input type=\"number\" id=\"first\">\n" +
+                decision +
+                " <input type=\"number\" id=\"second\">"
             break;
-        case "cos": case "tan": case "cotan": case "sin": case "log":
-            numbers.innerHTML="<label for=\"first\">Enter a number: </label>" +
-                "<input type=\"number\" id=\"first\">\n"
+        case "Math.cos(": case "Math.tan(": case "ctg(": case "Math.sin(": case "Math.log(":
             decision = action
+            numbers.innerHTML=decision +
+                "<input type=\"number\" id=\"first\">\n" + ")"
             break;
         default:
             numbers.innerHTML=null
@@ -112,7 +111,7 @@ function calculate(){
         answer4.innerHTML= eval(f+decision+s)
     } catch (e) {
         var f = document.getElementById("first").value
-        answer4.innerHTML = eval(decision+f+")")
+        answer4.innerHTML = eval(decision+f*(Math.PI/180)+")").toFixed(4)
     }
 }
 function ctg(x) { return 1 / Math.tan(x); }
